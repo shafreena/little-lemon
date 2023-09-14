@@ -1,8 +1,8 @@
 const navLinks = [
-  {anchor: '', name: 'Home'},
+  {anchor: '/', name: 'Home'},
   {anchor: '', name: 'About'},
   {anchor: '', name: 'Menu'},
-  {anchor: '', name: 'Reservations'},
+  {anchor: '/reservations', name: 'Reservations'},
   {anchor: '', name: 'Order Online'},
   {anchor: '', name: 'Login'},
 ];
