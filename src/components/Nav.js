@@ -1,21 +1,36 @@
-const navLinks = [
-  {anchor: '/', name: 'Home'},
-  {anchor: '/about', name: 'About'},
-  {anchor: '/menu', name: 'Menu'},
-  {anchor: '/reservations', name: 'Reservations'},
-  {anchor: '/order', name: 'Order Online'},
-  {anchor: '/login', name: 'Login'},
-];
+import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
-function Nav() {
+import logoImage from '../assets/logo.png';
+import hamburgerMenuIcon from '../assets/icon-hamburger-menu.svg';
+import { navLinks } from '../utils/navLinks';
+import './Nav.css';
+
+const Nav = () => {
+  const currentLocation = useLocation();
+  const [isNavExpanded, setIsNavExpanded] = useState(false);
+
   return (
-    <nav>
-      <ul>
+    <nav className="container grid nav-bar">
+      <Link className="nav-bar-logo" to="/">
+        <img src={logoImage} alt="Little Lemon logo" />
+      </Link>
+      <button 
+        className="nav-bar-hamburger" 
+        type="button" 
+        onClick={() => setIsNavExpanded(!isNavExpanded)}
+      >
+        <img src={hamburgerMenuIcon} alt="Navigation menu icon" />
+      </button>
+      <ul className={isNavExpanded ? 'nav-bar-links expanded' : 'nav-bar-links'}>
         {navLinks.map((navLink, index) => 
           <li key={index}>
-            <a href={navLink.anchor}>
+            <Link 
+              className={currentLocation.pathname === navLink.anchor ? 'currentLocation' : ''} 
+              to={navLink.anchor}
+            >
               {navLink.name}
-            </a>
+            </Link>
           </li>
         )}
       </ul>
